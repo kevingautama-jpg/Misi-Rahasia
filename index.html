@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Keamanan Pusat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Audio BGM -->
+    <audio id="audioTegang" src="tegang.mp3" loop></audio>
+    <audio id="audioUltah" src="ultah.mp3" loop></audio>
+
+    <!-- Timer Melayang untuk Mode Hukuman (Awalnya Sembunyi) -->
+    <div id="penaltyTimerBox">03:00</div>
+
+    <!-- HALAMAN 1 -->
+    <div id="page1" class="page active theme-hacker">
+        <div class="container">
+            <h2>[ VERIFIKASI AGEN: TAHAP 1 ]</h2>
+            <p>Selain bahasa Indonesia, mata pelajaran bahasa apa yang paling kamu sukai?</p>
+            <input type="text" id="ans1" placeholder="Masukkan jawaban..." autocomplete="off">
+            <button onclick="nextPage(1, 2)">SUBMIT</button>
+        </div>
+    </div>
+
+    <!-- HALAMAN 2 -->
+    <div id="page2" class="page theme-hacker">
+        <div class="container">
+            <h2>[ VERIFIKASI AGEN: TAHAP 2 ]</h2>
+            <p>Mata pelajaran apa yang menurutmu paling banyak ngasih tugas?</p>
+            <input type="text" id="ans2" placeholder="Masukkan jawaban..." autocomplete="off">
+            <button onclick="nextPage(2, 3)">SUBMIT</button>
+        </div>
+    </div>
+
+    <!-- HALAMAN 3 -->
+    <div id="page3" class="page theme-hacker">
+        <div class="container">
+            <h2>[ VERIFIKASI AGEN: TAHAP 3 ]</h2>
+            <p>Mata pelajaran apa yang menurutmu paling seru atau asik?</p>
+            <input type="text" id="ans3" placeholder="Masukkan jawaban..." autocomplete="off">
+            <button onclick="nextPage(3, 4)">SUBMIT</button>
+        </div>
+    </div>
+
+    <!-- HALAMAN 4 -->
+    <div id="page4" class="page theme-hacker">
+        <div class="container">
+            <h2>[ VERIFIKASI AGEN: TAHAP 4 ]</h2>
+            <p>Sebutkan makanan atau minuman favoritmu!</p>
+            <input type="text" id="ans4" placeholder="Masukkan jawaban..." autocomplete="off">
+            <button onclick="nextPage(4, 5)">SUBMIT</button>
+        </div>
+    </div>
+
+    <!-- HALAMAN 5: Mini-Game Wordle -->
+    <div id="page5" class="page theme-hacker">
+        <div class="container">
+            <h2>[ PUSAT KONTROL KEAMANAN ]</h2>
+            <p class="clue-text">⚠️ KODE FRAGMENT TIDAK BERURUTAN<br>Dekripsikan 8 digit angka berikut ke posisi yang benar:</p>
+            <h3 class="acak">[ 2 - 0 - 1 - 5 - 1 - 0 - 2 - 1 ]</h3>
+            <p id="nyawaText" style="color: yellow; font-size: 18px; margin-bottom: 10px;">SISA PERCOBAAN: 3</p>
+            
+            <input type="number" id="ans5" placeholder="Masukkan 8 digit angka" autocomplete="off">
+            <button onclick="checkPassword()">DEKRIPSI</button>
+            
+            <div id="wordle-board"></div>
+
+            <div class="legend">
+                <p>🟩 <b>HIJAU:</b> Angka & posisi tepat.</p>
+                <p>🟨 <b>KUNING:</b> Angka benar, posisi salah.</p>
+                <p>🟥 <b>MERAH:</b> Angka salah / tidak ada.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================== ZONA HUKUMAN ================== -->
+
+    <div id="pageWarning" class="page theme-red">
+        <div class="container">
+            <h1 class="blink" style="font-size: 40px;">🚨 AKSES DIBLOKIR 🚨</h1>
+            <h2 style="margin-top: 20px;">PERCOBAAN HABIS!</h2>
+            <p style="font-size: 20px;">INI KESEMPATAN TERAKHIRMU ATAU SISTEM AKAN HANCUR!</p>
+        </div>
+    </div>
+
+    <div id="page5B" class="page theme-hacker">
+        <div class="container">
+            <h1 style="color: red;">[ PROTOKOL DARURAT: TAHAP 1/4 ]</h1>
+            <p class="clue-text">⚠️ KODE FRAGMENT TIDAK BERURUTAN<br>Gunakan 8 digit angka berikut untuk membuka sandi utama (MODE BUTA):</p>
+            <h3 class="acak">[ 2 - 0 - 1 - 5 - 1 - 0 - 2 - 1 ]</h3>
+            <input type="number" id="ans5B" placeholder="Masukkan 8 digit angka..." autocomplete="off">
+            <button onclick="cek5B()">LANJUTKAN</button>
+        </div>
+    </div>
+
+    <div id="page6B" class="page theme-hacker">
+        <div class="container">
+            <h1 style="color: red;">[ PROTOKOL DARURAT: TAHAP 2/4 ]</h1>
+            <p>Hasil dari: <b>(5.000 × 0) + (100 ÷ 50)</b></p>
+            <input type="number" id="ans6B" placeholder="Masukkan jawaban..." autocomplete="off">
+            <button onclick="cek6B()">LANJUTKAN</button>
+        </div>
+    </div>
+
+    <div id="page7B" class="page theme-hacker">
+        <div class="container">
+            <h1 style="color: red;">[ PROTOKOL DARURAT: TAHAP 3/4 ]</h1>
+            <p>Akar kuadrat dari: <b>(99.999.999 × 0) + 9</b></p>
+            <input type="number" id="ans7B" placeholder="Masukkan jawaban..." autocomplete="off">
+            <button onclick="cek7B()">LANJUTKAN</button>
+        </div>
+    </div>
+
+    <div id="page8B" class="page theme-hacker">
+        <div class="container">
+            <h1 style="color: red;">[ PROTOKOL DARURAT: TAHAP 4/4 ]</h1>
+            <p>Hasil dari: <b>(1.024 ÷ 256) × (1.000.000 pangkat 0)</b></p>
+            <input type="number" id="ans8B" placeholder="Masukkan jawaban..." autocomplete="off">
+            <button onclick="cek8B()">SELESAIKAN MISI!</button>
+        </div>
+    </div>
+
+    <div id="pageGameOver" class="page theme-red">
+        <div class="container">
+            <h1 class="blink" style="font-size: 50px;">💀 SYSTEM FAILURE 💀</h1>
+            <p style="font-size: 24px; margin-top:10px;">WAKTU HABIS. MISI GAGAL.</p>
+            <p style="margin-top:20px; color: yellow;">MENGALIHKAN KE PROTOKOL PENGHANCURAN...</p>
+        </div>
+    </div>
+
+    <!-- ================== ZONA KEJUTAN ================== -->
+
+    <div id="page6" class="page theme-red">
+        <div class="container">
+            <h1 class="blink">⚠️ SYSTEM HACKED ⚠️</h1>
+            <p>MENGUNDUH DATA RAHASIA...</p>
+            <h1 id="countdown">10</h1>
+        </div>
+    </div>
+
+    <div id="page7" class="page theme-sweet">
+        <div class="container">
+            <h1 class="title-sweet">🎉 Happy Birthday Vanetta! 🎉</h1>
+            <p>Cieee yang ulang tahun tanggal 15 Desember 2026! Semoga panjang umur, sehat selalu, dan makin jago belajarnya!</p>
+            <button class="btn-kado" onclick="nextToKado()">Buka Kado Utama 🎁</button>
+        </div>
+    </div>
+
+    <div id="page8" class="page theme-warning">
+        <div class="container">
+            <h1 class="blink">🚨 PERINGATAN AIB TERDETEKSI 🚨</h1>
+            <p>MEMBUKA FILE RAHASIA DALAM 3 DETIK...</p>
+        </div>
+    </div>
+
+    <div id="page9" class="page theme-gallery">
+        <div class="container">
+            <h2>Memori Kelas Kita ✨</h2>
+            <div class="gallery-grid">
+                <img src="foto1.jpg" alt="Foto 1"><img src="foto2.jpg" alt="Foto 2">
+                <img src="foto3.jpg" alt="Foto 3"><img src="foto4.jpg" alt="Foto 4">
+                <img src="foto5.jpg" alt="Foto 5"><img src="foto6.jpg" alt="Foto 6">
+                <img src="foto7.jpg" alt="Foto 7"><img src="foto8.jpg" alt="Foto 8">
+            </div>
+            <p class="watermark">Dibuat khusus oleh: Kevin Gautama Yang 🚀 (CEO Neuratech Robotics)</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
